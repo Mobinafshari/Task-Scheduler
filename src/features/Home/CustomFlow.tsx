@@ -9,12 +9,12 @@ const CustomFlow: React.FC<CustomFlowProps> = ({ children, ...props }) => {
       minZoom={1}
       maxZoom={2}
       panOnDrag
-      // draggable="true"
+      draggable={false}
       nodesDraggable
       fitView
       fitViewOptions={{
         maxZoom: 1,
-        minZoom: 1,
+        minZoom: 2,
       }}
       connectionMode={ConnectionMode.Loose}
       preventScrolling

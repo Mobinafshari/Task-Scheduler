@@ -1,9 +1,6 @@
 import styles from '@features/Home/styles/Home.module.scss';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import {
-  ReactFlow,
-  MiniMap,
-  Controls,
   Background,
   useNodesState,
   useEdgesState,
@@ -16,6 +13,7 @@ import {
 import 'reactflow/dist/style.css';
 import CustomFlow from '@features/Home/CustomFlow';
 import CustomPanel from '@features/Home/CustomPanel';
+import CustomNode from '@features/Home/CustomNode';
 type ParamsType = {
   source: string;
   id: string;
@@ -23,12 +21,30 @@ type ParamsType = {
 };
 
 const initialNodes = [
-  { id: '101', position: { x: 100, y: 200 }, data: { label: 'Hello' } },
-  { id: '202', position: { x: 200, y: 500 }, data: { label: 'World!' } },
-  { id: '303', position: { x: 500, y: 100 }, data: { label: 'Random!' } },
+  {
+    id: '101',
+    position: { x: 100, y: 200 },
+    data: { label: 'Hello' },
+    type: 'CustomNode',
+  },
+  {
+    id: '202',
+    position: { x: 200, y: 500 },
+    data: { label: 'World!' },
+    type: 'CustomNode',
+  },
+  {
+    id: '303',
+    position: { x: 500, y: 100 },
+    data: { label: 'Random!' },
+    type: 'CustomNode',
+  },
 ];
 const initialEdges = [{ id: 'e101-202', source: '101', target: '202' }];
 
+const nodeTypes = {
+  CustomNode: CustomNode,
+};
 export default function Home() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -44,7 +60,14 @@ export default function Home() {
   );
   return (
     <div className={styles.container}>
-      <CustomFlow nodes={nodes} edges={edges} onConnect={onConnect}>
+      <CustomFlow
+        nodes={nodes}
+        edges={edges}
+        onConnect={onConnect}
+        nodeTypes={nodeTypes}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+      >
         <Panel position="top-center">
           <CustomPanel />
         </Panel>
