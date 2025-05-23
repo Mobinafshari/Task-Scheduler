@@ -1,22 +1,9 @@
 import { NodeProps, Handle, Position } from 'reactflow';
-
+import styles from './styles/Home.module.scss';
 const CustomNode = ({ data }: NodeProps) => {
   return (
-    <div
-      style={{
-        padding: 10,
-        border: '1px solid #555',
-        borderRadius: 8,
-        background: '#fff',
-        minWidth: 100,
-        position: 'relative',
-      }}
-    >
-      <div style={{ fontWeight: 'bold', marginBottom: 4 }}>{data.label}</div>
-
-      <div style={{ fontSize: 12, color: '#888' }}>
-        {data.description || 'Extra content here'}
-      </div>
+    <div className={styles.node}>
+      <div className={styles.label}>{data.label}</div>
 
       <Handle type="target" position={Position.Top} />
       <Handle type="source" position={Position.Bottom} />

@@ -4,7 +4,7 @@ import faTranslate from '@locale/fa-translate.ts';
 import enTranslate from '@locale/en-translate.ts';
 type Locale = 'en' | 'fa';
 
-const locale: Locale = (localStorage.getItem('locale') as Locale) ?? 'fa';
+const locale: Locale = (localStorage.getItem('locale') as Locale) ?? 'en';
 
 const resources = {
   en: {

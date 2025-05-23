@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <ErrorBoundary fallback={<h1>Something went wrong.</h1>}>
       <ThemeProvider >
         <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
           <React.StrictMode>
             <App />
           </React.StrictMode>

@@ -21,46 +21,12 @@ type ParamsType = {
   target: string;
 };
 
-const initialNodes = [
-  {
-    id: '101',
-    position: { x: 100, y: 200 },
-    data: { label: 'Hello' },
-    type: 'CustomNode',
-  },
-  {
-    id: '202',
-    position: { x: 200, y: 500 },
-    data: { label: 'World!' },
-    type: 'CustomNode',
-  },
-  {
-    id: '303',
-    position: { x: 500, y: 100 },
-    data: { label: 'Random!' },
-    type: 'CustomNode',
-  },
-];
-const initialEdges = [
-  {
-    id: 'e101-202',
-    source: '101',
-    target: '202',
-    markerEnd: {
-      type: MarkerType.Arrow,
-      color: 'blue',
-      width: 40,
-      height: 40,
-    },
-  },
-];
-
 const nodeTypes = {
   CustomNode: CustomNode,
 };
 export default function Home() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, _, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   const onConnect = useCallback(
     (params: Connection | ParamsType) => {
