@@ -25,15 +25,15 @@
   border: 1px solid #555;
   border-radius: 8px;
   background: #fff;
-  min-width: 150px;
+  min-width: 200px;
   max-width: 300px;
   min-height: 50px;
   width: 100%;
 
   position: relative;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
   &::after {
     content: 'Input';
     position: absolute;
@@ -63,6 +63,11 @@
     background-color: rgb(57, 79, 199);
     border-radius: 8px;
     font-size: 12px;
+  }
+  &__icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 .label {

@@ -3,6 +3,8 @@ import { Suspense, SVGProps } from 'react';
 
 const icons = {
   Send: retryDynamicImport(() => import('@icons/send.svg?react')),
+  Delete: retryDynamicImport(() => import('@icons/delete.svg?react')),
+  Info: retryDynamicImport(() => import('@icons/Info.svg?react')),
 };
 
 type CustomIcon = {
