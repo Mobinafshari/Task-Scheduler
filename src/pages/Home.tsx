@@ -8,6 +8,7 @@ import {
   BackgroundVariant,
   Connection,
   Panel,
+  MarkerType,
 } from 'reactflow';
 
 import 'reactflow/dist/style.css';
@@ -40,7 +41,19 @@ const initialNodes = [
     type: 'CustomNode',
   },
 ];
-const initialEdges = [{ id: 'e101-202', source: '101', target: '202' }];
+const initialEdges = [
+  {
+    id: 'e101-202',
+    source: '101',
+    target: '202',
+    markerEnd: {
+      type: MarkerType.Arrow,
+      color: 'blue',
+      width: 40,
+      height: 40,
+    },
+  },
+];
 
 const nodeTypes = {
   CustomNode: CustomNode,
@@ -51,9 +64,19 @@ export default function Home() {
 
   const onConnect = useCallback(
     (params: Connection | ParamsType) => {
-      console.log('params', params);
       setEdges((eds) => {
-        return addEdge(params, eds);
+        return addEdge(
+          {
+            ...params,
+            markerEnd: {
+              type: MarkerType.Arrow,
+              color: 'blue',
+              width: 40,
+              height: 40,
+            },
+          },
+          eds
+        );
       });
     },
     [setEdges]

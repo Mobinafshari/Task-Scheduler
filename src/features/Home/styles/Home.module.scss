@@ -3,3 +3,15 @@
   background-color: antiquewhite;
   width: 100vw;
 }
+
+.customPanel {
+  width: 50vw;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 1px 1px 10px darkblue;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
