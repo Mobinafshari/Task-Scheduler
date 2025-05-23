@@ -8,38 +8,53 @@ import {
   useNodesState,
   useEdgesState,
   addEdge,
-} from '@xyflow/react';
+  BackgroundVariant,
+  Connection,
+  Panel,
+} from 'reactflow';
 
-import '@xyflow/react/dist/style.css';
+import 'reactflow/dist/style.css';
+import CustomFlow from '@features/Home/CustomFlow';
+import CustomPanel from '@features/Home/CustomPanel';
+type ParamsType = {
+  source: string;
+  id: string;
+  target: string;
+};
 
 const initialNodes = [
-  { id: '1', position: { x: 500, y: 200 }, data: { label: 'Hello' } },
-  { id: '2', position: { x: 500, y: 500 }, data: { label: 'World!' } },
+  { id: '101', position: { x: 100, y: 200 }, data: { label: 'Hello' } },
+  { id: '202', position: { x: 200, y: 500 }, data: { label: 'World!' } },
+  { id: '303', position: { x: 500, y: 100 }, data: { label: 'Random!' } },
 ];
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
+const initialEdges = [{ id: 'e101-202', source: '101', target: '202' }];
 
 export default function Home() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
+    (params: Connection | ParamsType) => {
+      console.log('params', params);
+      setEdges((eds) => {
+        return addEdge(params, eds);
+      });
+    },
     [setEdges]
   );
-
   return (
     <div className={styles.container}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-      >
-        <Controls />
-        <MiniMap />
-        <Background variant="dots" gap={12} size={1} />
-      </ReactFlow>
+      <CustomFlow nodes={nodes} edges={edges} onConnect={onConnect}>
+        <Panel position="top-center">
+          <CustomPanel />
+        </Panel>
+        <Background
+          color="#ccc"
+          variant={BackgroundVariant.Dots}
+          gap={12}
+          size={3}
+        />
+      </CustomFlow>
     </div>
   );
 }
