@@ -82,3 +82,5 @@ const dag = new DAG();
 export const addDependency = (from: string, to: string) => {
   dag.addEdge(from, to);
 };
+
+export const graph = dag;
