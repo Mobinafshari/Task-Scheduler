@@ -3,14 +3,24 @@ import styles from './styles/Home.module.scss';
 import { Checkbox, IconButton } from '@mui/material';
 import CustomIcon from '@assets/Icon';
 import toast from 'react-hot-toast';
+import useTopologicalSort from '@features/hook/useTopologicalSort';
 const CustomNode = ({ data, id }: NodeProps) => {
   const { setNodes } = useReactFlow();
+  const gg = useTopologicalSort();
   return (
     <div className={styles.node}>
       <div className={styles.label}>{data.label}</div>
 
-      <Handle type="target" position={Position.Top} />
-      <Handle type="source" position={Position.Bottom} />
+      <Handle
+        type="target"
+        position={Position.Top}
+        style={{ width: 10, height: 10 }}
+      />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        style={{ width: 10, height: 10 }}
+      />
       <div className={styles['node__icons']}>
         <Checkbox sx={{ padding: 0 }} />
         <IconButton

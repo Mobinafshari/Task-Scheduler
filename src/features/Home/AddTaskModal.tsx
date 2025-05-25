@@ -35,7 +35,7 @@ function AddTaskModal({ open, onClose }: Props) {
       id: new Date().toISOString(),
       data: { label: task },
       type: 'CustomNode',
-      position: { x: 500, y: 100 },
+      position: { x: 500, y: 0 },
     });
     onClose();
   };
