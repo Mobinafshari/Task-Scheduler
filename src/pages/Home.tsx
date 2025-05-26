@@ -1,5 +1,5 @@
 import styles from '@features/Home/styles/Home.module.scss';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   Background,
   useNodesState,
@@ -28,7 +28,6 @@ const nodeTypes = {
 export default function Home() {
   const [nodes, _, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-
   const onConnect = useCallback(
     (params: Connection | ParamsType) => {
       setEdges((eds) => {
@@ -48,6 +47,9 @@ export default function Home() {
     },
     [setEdges]
   );
+  useEffect(() => {
+    console.log('Edges changed:', edges);
+  }, [edges]);
   return (
     <div className={styles.container}>
       <CustomFlow

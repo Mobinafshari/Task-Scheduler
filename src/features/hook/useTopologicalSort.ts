@@ -4,7 +4,6 @@ const useTopologicalSort = () => {
   const { getEdges } = useReactFlow();
   getEdges().map((edge) => addDependency(edge.source, edge.target));
   const sorted = topologicalSort(graph);
-  console.log(sorted);
+  return { sorted };
 };
-
 export default useTopologicalSort;

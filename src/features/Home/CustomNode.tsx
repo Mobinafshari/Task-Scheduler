@@ -6,7 +6,8 @@ import toast from 'react-hot-toast';
 import useTopologicalSort from '@features/hook/useTopologicalSort';
 const CustomNode = ({ data, id }: NodeProps) => {
   const { setNodes } = useReactFlow();
-  const gg = useTopologicalSort();
+  const { sorted } = useTopologicalSort();
+  console.log('===>>', sorted);
   return (
     <div className={styles.node}>
       <div className={styles.label}>{data.label}</div>
