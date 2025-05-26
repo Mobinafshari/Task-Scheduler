@@ -1,5 +1,5 @@
-import { createContext, ReactNode, useState } from 'react';
-type EdgeType = { id: string; source: string; target: string };
+import { createContext, ReactNode, useContext, useState } from 'react';
+type EdgeType = { source: string; target: string };
 type ContextType = {
   edges: EdgeType[];
   addEdge: (edge: EdgeType) => void;
@@ -16,4 +16,11 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </AppContext.Provider>
   );
+};
+export const useAppContext = () => {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error('useAppContext must be used within a ContextProvider');
+  }
+  return context;
 };

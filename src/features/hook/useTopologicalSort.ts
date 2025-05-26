@@ -1,8 +1,8 @@
-import { useReactFlow } from 'reactflow';
+import { useAppContext } from '@context/AppContext';
 import { addDependency, topologicalSort, graph } from './DAG';
 const useTopologicalSort = () => {
-  const { getEdges } = useReactFlow();
-  getEdges().map((edge) => addDependency(edge.source, edge.target));
+  const { edges } = useAppContext();
+  edges.map((edge) => addDependency(edge.source, edge.target));
   const sorted = topologicalSort(graph);
   return { sorted };
 };
