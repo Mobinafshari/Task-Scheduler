@@ -3,6 +3,7 @@ type EdgeType = { source: string; target: string };
 type ContextType = {
   edges: EdgeType[];
   addEdge: (edge: EdgeType) => void;
+  removeEdge: (id: string) => void;
 };
 const AppContext = createContext<null | ContextType>(null);
 
@@ -11,8 +12,11 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
   const addEdge = (edge: EdgeType) => {
     setEdges((prev) => [...prev, edge]);
   };
+  const removeEdge = (id: string) => {
+    setEdges(edges.filter((e) => e.source !== id && e.target !== id));
+  };
   return (
-    <AppContext.Provider value={{ edges, addEdge }}>
+    <AppContext.Provider value={{ edges, addEdge, removeEdge }}>
       {children}
     </AppContext.Provider>
   );

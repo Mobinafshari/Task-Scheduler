@@ -4,9 +4,12 @@ import { Checkbox, IconButton } from '@mui/material';
 import CustomIcon from '@assets/Icon';
 import toast from 'react-hot-toast';
 import useTopologicalSort from '@features/hook/useTopologicalSort';
-import { ChangeEvent, MouseEvent } from 'react';
+import { ChangeEvent } from 'react';
+import { useAppContext } from '@context/AppContext';
 const CustomNode = ({ data, id }: NodeProps) => {
   const { setNodes } = useReactFlow();
+  const { removeEdge, edges } = useAppContext();
+  console.log('====>>>', edges);
   const { sorted } = useTopologicalSort();
   const handleDeleteNode = () => {
     setNodes((nds) => nds.filter((n) => n.id !== id));
@@ -22,10 +25,17 @@ const CustomNode = ({ data, id }: NodeProps) => {
     });
   };
   const handleCompleteTask = (e: ChangeEvent<HTMLInputElement>) => {
-    if (sorted.indexOf(id) !== -1 || sorted.indexOf(id) !== 0) {
+    if (sorted.indexOf(id) !== -1 && sorted.indexOf(id) !== 0) {
       e.preventDefault();
+      toast.error(
+        'This task has dependencies and you should complete them first',
+        { position: 'top-left' }
+      );
       return;
     }
+    removeEdge(id);
+    setNodes((nds) => nds.filter((n) => n.id !== id));
+    toast.success('Task completed successfully!', { position: 'top-left' });
   };
   return (
     <div className={styles.node}>
